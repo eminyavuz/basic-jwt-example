@@ -21,22 +21,24 @@ public class UserService {
     private AuthenticationManager manager;
     @Autowired
     private JWTService jwtService;
-    private BCryptPasswordEncoder encoder= new BCryptPasswordEncoder(12);
+    private final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(12);
+
     @Transactional
-    public User register(User user)
-    {
-     user.setPassword(encoder.encode(user.getPassword()));
-    return repo.save(user);
+    public User register(User user) {
+        user.setPassword(encoder.encode(user.getPassword()));
+        return repo.save(user);
     }
-    public String verify(User user ){
-        Authentication authentication= manager.authenticate
-                (new UsernamePasswordAuthenticationToken(user.getUsername(),user.getPassword()));
-        if(authentication.isAuthenticated())
-        return jwtService.generateToken(user.getUsername());
+
+    public String verify(User user) {
+        Authentication authentication = manager.authenticate
+                (new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword()));
+        if (authentication.isAuthenticated())
+            return jwtService.generateToken(user.getUsername());
         else
             return "Fail";
     }
-    public List<User> getAll(){
+
+    public List<User> getAll() {
         return repo.findAll();
     }
 }

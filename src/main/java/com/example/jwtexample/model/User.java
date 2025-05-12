@@ -1,10 +1,12 @@
 package com.example.jwtexample.model;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.CollectionId;
 
 @Data
 @NoArgsConstructor
@@ -13,10 +15,10 @@ import org.hibernate.annotations.CollectionId;
 @Table(name = "user")
 public class User {
     @Id
-    private  int id;
+    private int id;
     @Column(name = "username")
-    private  String username;
+    private String username;
     @Column(name = "password")
-    private  String password;
+    private String password;
 
 }
